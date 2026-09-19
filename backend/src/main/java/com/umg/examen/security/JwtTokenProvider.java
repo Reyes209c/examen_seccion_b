@@ -50,6 +50,31 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    public String generateRefreshToken(Authentication authentication) {
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Date now = new Date();
+        // Refresh token lasts 7 days
+        Date expiryDate = new Date(now.getTime() + (7L * 24 * 60 * 60 * 1000));
+
+        return Jwts.builder()
+                .subject(userPrincipal.getUsername())
+                .issuedAt(now)
+                .expiration(expiryDate)
+                .signWith(getSigningKey())
+                .compact();
+    }
+
+    public String generateRefreshTokenFromUsername(String username) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + (7L * 24 * 60 * 60 * 1000));
+        return Jwts.builder()
+                .subject(username)
+                .issuedAt(now)
+                .expiration(expiryDate)
+                .signWith(getSigningKey())
+                .compact();
+    }
+
     public String generateTokenFromUsername(String username, List<String> roles) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);

@@ -11,6 +11,7 @@ export class AuthService {
 
     if (typeof window !== "undefined") {
       localStorage.setItem("token", session.token);
+      localStorage.setItem("refreshToken", response.data?.refreshToken || "");
       localStorage.setItem("user", JSON.stringify(session.user));
     }
 

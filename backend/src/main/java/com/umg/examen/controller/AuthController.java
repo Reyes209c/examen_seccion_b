@@ -41,4 +41,20 @@ public class AuthController {
         UserResponse user = authService.getCurrentUser(authentication.getName());
         return ResponseEntity.ok(ApiResponse.success("Perfil de usuario obtenido", user));
     }
+
+    @PostMapping("/refresh")
+    @Operation(summary = "Refrescar token", description = "Genera un nuevo access token a partir de un refresh token válido")
+    public ResponseEntity<ApiResponse<AuthResponse>> refreshToken(@RequestBody java.util.Map<String, String> request) {
+        String refreshToken = request.get("refreshToken");
+        if (refreshToken == null || refreshToken.isEmpty()) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Refresh token es requerido"));
+        }
+        
+        try {
+            AuthResponse authResponse = authService.refreshToken(refreshToken);
+            return ResponseEntity.ok(ApiResponse.success("Token refrescado exitosamente", authResponse));
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(ApiResponse.error(e.getMessage()));
+        }
+    }
 }

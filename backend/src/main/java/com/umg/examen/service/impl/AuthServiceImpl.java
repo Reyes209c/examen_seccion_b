@@ -43,11 +43,14 @@ public class AuthServiceImpl implements AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenProvider.generateToken(authentication);
+        String refreshToken = tokenProvider.generateRefreshToken(authentication);
 
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + request.getUsername()));
 
-        return userMapper.toAuthResponse(user, token);
+        AuthResponse response = userMapper.toAuthResponse(user, token);
+        response.setRefreshToken(refreshToken);
+        return response;
     }
 
     @Override
@@ -56,5 +59,29 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
         return userMapper.toResponse(user);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public AuthResponse refreshToken(String refreshToken) {
+        if (!tokenProvider.validateToken(refreshToken)) {
+            throw new RuntimeException("Refresh token inválido o expirado");
+        }
+        
+        String username = tokenProvider.getUsernameFromJwt(refreshToken);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+                
+        // Regenerar tokens
+        java.util.List<String> roles = user.getRoles().stream()
+            .map(r -> r.getName())
+            .collect(java.util.stream.Collectors.toList());
+            
+        String newToken = tokenProvider.generateTokenFromUsername(username, roles);
+        String newRefreshToken = tokenProvider.generateRefreshTokenFromUsername(username);
+        
+        AuthResponse response = userMapper.toAuthResponse(user, newToken);
+        response.setRefreshToken(newRefreshToken);
+        return response;
     }
 }
