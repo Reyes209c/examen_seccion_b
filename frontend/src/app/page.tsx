@@ -87,27 +87,27 @@ export default function HomePage() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-16">
         {/* Hero Section */}
         <section className="text-center space-y-5 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Universidad Mariano Gálvez de Guatemala • Segundo Parcial</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold tracking-widest uppercase">
+            <Sparkles className="w-4 h-4" />
+            <span>UMG • Segundo Parcial</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
             Gestión y Catálogo de{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-green-400">
               Productos
             </span>
           </h1>
 
-          <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-light">
             Plataforma monorepo moderna desarrollada con Spring Boot (Java 21), PostgreSQL con Liquibase, autenticación basada en JWT con control de roles, y frontend en Next.js con React.
           </p>
 
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
             {isAuthenticated ? (
               <Link
                 href="/dashboard/products"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/30 transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-xl shadow-emerald-600/20 transition-all hover:scale-105"
               >
                 <span>Acceder al Panel Privado</span>
                 <ArrowRight className="w-4 h-4" />
@@ -116,7 +116,7 @@ export default function HomePage() {
               <>
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/30 transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-xl shadow-emerald-600/20 transition-all hover:scale-105"
                 >
                   <span>Iniciar Sesión</span>
                   <ArrowRight className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function HomePage() {
                   href="http://localhost:8080/swagger-ui/index.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 font-medium text-sm transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-emerald-900/50 font-medium text-sm transition-all"
                 >
                   <Code2 className="w-4 h-4" />
                   <span>Documentación Swagger API</span>
@@ -157,18 +157,18 @@ export default function HomePage() {
 
         {/* Architecture & Roles Features */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-          <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+          <div className="p-6 rounded-2xl bg-slate-900/60 border border-emerald-900/30 hover:border-emerald-500/50 transition-colors space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white">Seguridad &amp; Roles JWT</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Control de acceso con roles <span className="text-blue-300 font-mono">ROLE_ADMIN</span> y <span className="text-emerald-300 font-mono">ROLE_USER</span>. Permisos diferenciados para consulta y mutación de inventario.
+              Control de acceso con roles <span className="text-emerald-300 font-mono">ROLE_ADMIN</span> y <span className="text-emerald-300 font-mono">ROLE_USER</span>. Permisos diferenciados para consulta y mutación de inventario.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+          <div className="p-6 rounded-2xl bg-slate-900/60 border border-teal-900/30 hover:border-teal-500/50 transition-colors space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center">
               <Database className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white">PostgreSQL &amp; Liquibase</h3>
@@ -177,8 +177,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+          <div className="p-6 rounded-2xl bg-slate-900/60 border border-green-900/30 hover:border-green-500/50 transition-colors space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center">
               <Layers className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white">Arquitectura Limpia y Mappers</h3>
